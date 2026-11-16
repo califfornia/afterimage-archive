@@ -1,0 +1,424 @@
+/* ==========================================================================
+   View D — the viewing table
+   ========================================================================== */
+
+.viewing {
+  display: grid;
+  gap: var(--ax-4);
+}
+
+.viewing__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: var(--ax-6);
+  align-items: start;
+}
+
+.viewing__main {
+  display: grid;
+  gap: var(--ax-5);
+  min-width: 0;
+}
+
+/* ---------- Stage: the reserved player frame ----------
+   Exactly 16:9, sized so the whole frame fits the window under the masthead.
+   The player (placeholder today) fills [data-player-slot] completely. */
+
+.stage {
+  container: stage / inline-size;
+  background: var(--ax-screen);
+}
+
+.player-slot {
+  position: relative;
+  width: min(100%, calc((100svh - var(--ax-masthead-h) - 140px) * 16 / 9));
+  min-width: min(100%, 320px);
+  aspect-ratio: 16 / 9;
+  margin: 0 auto;
+  overflow: hidden;
+  background: var(--ax-screen);
+}
+
+/* ---------- Placeholder ---------- */
+
+.placeholder {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-items: end;
+  padding: clamp(16px, 4cqi, 40px);
+}
+
+.placeholder__still {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.85) brightness(0.32) contrast(1.05);
+}
+
+/* Crop frame: the area the player will own. */
+.placeholder::after {
+  content: '';
+  position: absolute;
+  inset: 12px;
+  border: 1px dashed var(--ax-line-loud);
+  pointer-events: none;
+}
+
+.placeholder__reg {
+  position: absolute;
+  z-index: 1;
+  width: 16px;
+  height: 16px;
+  border: 0 solid var(--ax-accent);
+}
+
+.placeholder__reg--tl { top: 12px; left: 12px; border-top-width: 1.5px; border-left-width: 1.5px; }
+.placeholder__reg--tr { top: 12px; right: 12px; border-top-width: 1.5px; border-right-width: 1.5px; }
+.placeholder__reg--bl { bottom: 12px; left: 12px; border-bottom-width: 1.5px; border-left-width: 1.5px; }
+.placeholder__reg--br { right: 12px; bottom: 12px; border-right-width: 1.5px; border-bottom-width: 1.5px; }
+
+.placeholder__plate {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 6px;
+  max-width: 60ch;
+}
+
+.placeholder__reserved {
+  color: var(--ax-accent);
+  font-family: var(--ax-font-mono);
+  font-size: 11px;
+  letter-spacing: var(--ax-track);
+  text-transform: uppercase;
+}
+
+.placeholder__id {
+  color: var(--ax-paper);
+  font-family: var(--ax-font-mono);
+  font-size: 13px;
+}
+
+.placeholder__title {
+  font-size: clamp(20px, 3.4cqi, 36px);
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.placeholder__spec {
+  color: var(--ax-ink-2);
+  font-family: var(--ax-font-mono);
+  font-size: 12px;
+}
+
+.placeholder__note {
+  color: var(--ax-ink-2);
+  font-size: 13px;
+}
+
+.placeholder__ratio {
+  position: absolute;
+  top: 22px;
+  right: 34px;
+  z-index: 1;
+  color: var(--ax-ink-2);
+  font-family: var(--ax-font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+}
+
+@container stage (max-width: 520px) {
+  .placeholder__note,
+  .placeholder__spec {
+    display: none;
+  }
+}
+
+/* ---------- Record card ---------- */
+
+.record-card {
+  display: grid;
+  gap: var(--ax-5);
+}
+
+.record-card__head {
+  display: grid;
+  gap: var(--ax-2);
+}
+
+.record-card__path {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ax-2);
+  color: var(--ax-ink-2);
+  font-family: var(--ax-font-mono);
+  font-size: 12px;
+}
+
+.record-card__path a {
+  text-decoration: underline;
+  text-decoration-color: var(--ax-line-loud);
+  text-underline-offset: 3px;
+}
+
+@media (hover: hover) {
+  .record-card__path a:hover {
+    color: var(--ax-paper);
+  }
+}
+
+.record-card__title {
+  font-size: clamp(26px, 2.6vw, 38px);
+  font-weight: 500;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+.record-card__status {
+  display: grid;
+  grid-template-columns: auto minmax(80px, 280px) auto;
+  align-items: center;
+  gap: var(--ax-4);
+}
+
+.record-card__pct {
+  color: var(--ax-ink-2);
+  font-family: var(--ax-font-mono);
+  font-size: 12px;
+}
+
+.catalogue {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--ax-line-strong);
+}
+
+.catalogue > div {
+  display: grid;
+  gap: 2px;
+  padding: var(--ax-3) var(--ax-4) var(--ax-3) 0;
+  border-bottom: 1px solid var(--ax-line);
+}
+
+.catalogue dt {
+  color: var(--ax-ink-2);
+  font-family: var(--ax-font-mono);
+  font-size: 10px;
+  letter-spacing: var(--ax-track);
+  text-transform: uppercase;
+}
+
+.catalogue dd {
+  font-size: 14px;
+}
+
+.catalogue__wide {
+  grid-column: 1 / -1;
+}
+
+.catalogue__wide dd {
+  color: var(--ax-paper);
+  font-size: 13px;
+}
+
+.catalogue__id {
+  overflow-wrap: anywhere;
+  color: var(--ax-ink-2) !important;
+  font-size: 12px !important;
+}
+
+.record-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ax-3);
+}
+
+.record-card__actions .button--quiet {
+  border-color: var(--ax-line-strong);
+}
+
+/* ---------- Previous / next ---------- */
+
+.stepper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--ax-3);
+}
+
+.stepper__link {
+  display: grid;
+  gap: 2px;
+  padding: var(--ax-3) var(--ax-4);
+  border: 1px solid var(--ax-line-strong);
+  border-radius: var(--ax-radius);
+  transition: background-color var(--ax-fast) var(--ax-ease), border-color var(--ax-fast) var(--ax-ease);
+}
+
+.stepper__link--next {
+  text-align: right;
+  justify-items: end;
+}
+
+.stepper__link--end {
+  border-style: dashed;
+  color: var(--ax-ink-3);
+}
+
+.stepper__dir {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ax-2);
+  color: var(--ax-ink-2);
+  font-family: var(--ax-font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.stepper__id {
+  color: var(--ax-ink-2);
+  font-family: var(--ax-font-mono);
+  font-size: 12px;
+}
+
+.stepper__title {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.stepper__link--end .stepper__title {
+  color: var(--ax-ink-3);
+  font-weight: 400;
+}
+
+@media (hover: hover) {
+  a.stepper__link:hover {
+    background: var(--ax-surface);
+    border-color: var(--ax-line-loud);
+  }
+}
+
+/* ---------- Folder index beside the player ---------- */
+
+.viewing__aside {
+  position: sticky;
+  top: calc(var(--ax-masthead-h) + var(--ax-4));
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  max-height: calc(100svh - var(--ax-masthead-h) - var(--ax-6));
+  border: 1px solid var(--ax-line-strong);
+  background: var(--ax-surface);
+}
+
+.aside-head {
+  position: relative;
+  display: grid;
+  gap: 2px;
+  padding: var(--ax-4);
+  border-bottom: 1px solid var(--ax-line-strong);
+}
+
+.aside-head__tab {
+  justify-self: start;
+  margin-bottom: var(--ax-2);
+  padding: 2px 10px;
+  background: var(--ax-tab);
+  color: var(--ax-paper-ink);
+  font-family: var(--ax-font-mono);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.aside-head__title {
+  font-size: 20px;
+  font-weight: 600;
+  font-stretch: 85%;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.aside-head__meta {
+  color: var(--ax-ink-2);
+  font-family: var(--ax-font-mono);
+  font-size: 11px;
+}
+
+.viewing__aside .entries {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.aside-actions {
+  display: grid;
+  gap: var(--ax-2);
+  padding: var(--ax-3);
+  border-top: 1px solid var(--ax-line-strong);
+}
+
+.aside-actions .button {
+  justify-content: flex-start;
+}
+
+/* ---------- Compact ---------- */
+
+@media (max-width: 1100px) {
+  .viewing__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .viewing__aside {
+    position: static;
+    max-height: none;
+  }
+}
+
+@media (max-width: 720px) {
+  /* The frame runs edge to edge. */
+  .stage {
+    margin: 0 calc(-1 * var(--ax-gutter));
+  }
+
+  .player-slot {
+    width: 100%;
+  }
+
+  .placeholder::after {
+    inset: 8px;
+  }
+
+  .placeholder__reg--tl, .placeholder__reg--tr { top: 8px; }
+  .placeholder__reg--bl, .placeholder__reg--br { bottom: 8px; }
+  .placeholder__reg--tl, .placeholder__reg--bl { left: 8px; }
+  .placeholder__reg--tr, .placeholder__reg--br { right: 8px; }
+
+  .placeholder__ratio {
+    display: none;
+  }
+
+  .catalogue {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .record-card__status {
+    grid-template-columns: auto 1fr;
+  }
+
+  .record-card__pct {
+    grid-column: 1 / -1;
+  }
+
+  .stepper__title {
+    font-size: 14px;
+  }
+}
+
+/* On phones the record card's own path links replace the long breadcrumb. */
+@media (max-width: 720px) {
+  .viewing [data-region='crumbs'] {
+    display: none;
+  }
+}

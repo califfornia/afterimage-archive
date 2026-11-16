@@ -1,0 +1,167 @@
+/* ==========================================================================
+   Archive navigator: the cabinet as a tree, in a side sheet
+   ========================================================================== */
+
+.navigator {
+  position: fixed;
+  inset: 0 0 0 auto;
+  width: min(460px, 100%);
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-left: 1px solid var(--ax-line-strong);
+  background: var(--ax-surface);
+  color: var(--ax-paper);
+}
+
+.navigator[open] {
+  animation: navigator-in var(--ax-slow) var(--ax-ease);
+}
+
+.navigator::backdrop {
+  background: rgb(0 0 0 / 0.6);
+}
+
+@keyframes navigator-in {
+  from {
+    transform: translateX(24px);
+    opacity: 0;
+  }
+}
+
+.navigator__panel {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  height: 100%;
+}
+
+.navigator__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--ax-4);
+  padding: var(--ax-5) var(--ax-5) var(--ax-4);
+  border-bottom: 1px solid var(--ax-line-strong);
+}
+
+.navigator__title {
+  font-size: 24px;
+  font-weight: 600;
+  font-stretch: 80%;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.navigator__tree {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: var(--ax-2) 0 var(--ax-6);
+}
+
+.navigator summary {
+  display: flex;
+  align-items: center;
+  gap: var(--ax-3);
+  min-height: 44px;
+  padding: 0 var(--ax-5);
+  cursor: pointer;
+  list-style: none;
+}
+
+.navigator summary::-webkit-details-marker {
+  display: none;
+}
+
+.navigator summary::before {
+  content: '';
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid var(--ax-ink-2);
+  border-bottom: 1.5px solid var(--ax-ink-2);
+  transform: rotate(-45deg);
+  transition: transform var(--ax-fast) var(--ax-ease);
+}
+
+.navigator details[open] > summary::before {
+  transform: rotate(45deg);
+}
+
+@media (hover: hover) {
+  .navigator summary:hover,
+  .tree-record:hover {
+    background: var(--ax-raised);
+  }
+}
+
+.navigator summary:focus-visible,
+.tree-record:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--ax-accent);
+}
+
+.tree-drawer {
+  border-bottom: 1px solid var(--ax-line);
+}
+
+.tree-drawer__code {
+  color: var(--ax-ink-2);
+  font-family: var(--ax-font-mono);
+  font-size: 11px;
+}
+
+.tree-drawer__name {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 600;
+  font-stretch: 85%;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.tree-drawer__count {
+  color: var(--ax-ink-2);
+  font-family: var(--ax-font-mono);
+  font-size: 11px;
+}
+
+
+.tree-record {
+  display: grid;
+  grid-template-columns: 88px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--ax-3);
+  min-height: 44px;
+  padding: 6px var(--ax-5) 6px calc(var(--ax-5) + 18px);
+  font-size: 14px;
+}
+
+.tree-record__id {
+  color: var(--ax-ink-2);
+  font-family: var(--ax-font-mono);
+  font-size: 11px;
+}
+
+.tree-record[aria-current='true'] {
+  background: var(--ax-raised);
+  box-shadow: inset 3px 0 0 var(--ax-accent);
+}
+
+.tree-record[aria-current='true'] .tree-record__id {
+  color: var(--ax-accent);
+}
+
+@media (max-width: 720px) {
+  .navigator {
+    width: 100%;
+    border-left: 0;
+  }
+
+  .tree-record {
+    grid-template-columns: 76px minmax(0, 1fr) auto;
+    padding-left: calc(var(--ax-5) + 18px);
+  }
+}

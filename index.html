@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0c0706" />
+    <meta name="description" content="AFTERIMAGE ARCHIVE — a system for exploring moving images." />
+    <title>AFTERIMAGE ARCHIVE</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Crect width='18' height='18' fill='%230c0706'/%3E%3Cpath d='M3.25 2.75h11.5v12.5H3.25zM3.25 9h11.5' fill='none' stroke='%23F3DCD0' stroke-width='1.5'/%3E%3Cpath d='M7.5 5.75h3M7.5 12h3' stroke='%23FF4B2E' stroke-width='1.5'/%3E%3C/svg%3E" />
+    <script type="module" src="/src/main.ts"></script>
+  </head>
+  <body>
+    <a class="skip" href="#view">Skip to content</a>
+
+    <header class="masthead">
+      <a class="brand" href="#/" aria-label="AFTERIMAGE ARCHIVE, home">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <span class="brand__name">AFTERIMAGE <span class="brand__sub">Archive</span></span>
+        <span class="brand__tagline">A system for exploring moving images.</span>
+      </a>
+
+      <form class="search" id="search-form" role="search" autocomplete="off">
+        <label class="sr-only" for="search">Search records by title or archive ID</label>
+        <span class="search__icon" aria-hidden="true">
+          <svg viewBox="0 0 18 18" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><circle cx="7.75" cy="7.75" r="4.75"/><path d="m11.5 11.5 3.75 3.75"/></svg>
+        </span>
+        <input class="search__input" id="search" type="search" autocomplete="off" placeholder="Search title or ID" spellcheck="false" enterkeyhint="search" aria-describedby="search-hint" />
+        <kbd class="search__hint" id="search-hint" aria-label="Press slash to search">/</kbd>
+      </form>
+
+      <div class="masthead__end">
+        <a class="resume-chip" id="resume" href="#/" hidden>
+          <span class="resume-chip__label">On the table</span>
+          <span class="resume-chip__id"></span>
+        </a>
+        <button type="button" class="button button--quiet masthead__browse" data-action="open-navigator">
+          <svg class="icon" viewBox="0 0 18 18" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M3.25 2.75h11.5v12.5H3.25zM3.25 9h11.5M7.5 5.75h3M7.5 12h3"/></svg>
+          <span class="masthead__browse-label">Browse</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="view" tabindex="-1"></main>
+
+    <dialog class="navigator" id="navigator" aria-labelledby="navigator-title"></dialog>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+{
+  "name": "afterimage-archive",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "sync:skin": "rm -rf src/vendor/afterimage-skin && mkdir -p src/vendor && cp -R \"../video player/src/skin\" src/vendor/afterimage-skin && echo \"Synced AFTERIMAGE skin from ../video player/src/skin\""
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2",
+    "vite": "^8.3.8"
+  },
+  "dependencies": {
+    "@fontsource-variable/archivo": "^5.3.0",
+    "@fontsource/space-mono": "^5.3.0",
+    "@videojs/html": "10.4.0",
+    "@videojs/mux-video": "10.4.0"
+  }
+}

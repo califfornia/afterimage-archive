@@ -1,0 +1,162 @@
+/* ==========================================================================
+   View B — a drawer, opened: its label card beside the index of its records
+   ========================================================================== */
+
+.collection-view {
+  display: grid;
+  gap: var(--ax-5);
+}
+
+.collection-view__grid {
+  display: grid;
+  grid-template-columns: minmax(260px, 320px) minmax(0, 1fr);
+  gap: var(--ax-7);
+  align-items: start;
+}
+
+.collection-card {
+  position: sticky;
+  top: calc(var(--ax-masthead-h) + var(--ax-5));
+  padding-top: 28px;
+}
+
+.collection-card__tab {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-flex;
+  align-items: center;
+  height: 29px;
+  padding: 0 var(--ax-5);
+  background: var(--ax-tab);
+  color: var(--ax-paper-ink);
+  font-family: var(--ax-font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  clip-path: polygon(8px 0, calc(100% - 8px) 0, 100% 100%, 0 100%);
+}
+
+.collection-card__body {
+  display: grid;
+  gap: var(--ax-4);
+  padding: var(--ax-5);
+  border-top: 2px solid var(--ax-tab);
+  background: var(--ax-raised);
+}
+
+.collection-card__label {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--ax-3);
+  justify-self: start;
+  margin: 4px;
+  padding: 8px var(--ax-4) 7px;
+  border-radius: 1px;
+  background: var(--ax-paper);
+  color: var(--ax-paper-ink);
+  box-shadow:
+    0 0 0 3px var(--ax-holder),
+    0 0 0 4px rgb(0 0 0 / 0.5);
+}
+
+.collection-card__title {
+  font-size: 30px;
+  font-weight: 650;
+  font-stretch: 78%;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.collection-card__summary {
+  color: var(--ax-ink-2);
+  font-size: 14px;
+  text-wrap: pretty;
+}
+
+.index-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ax-3) var(--ax-5);
+  margin-bottom: var(--ax-4);
+}
+
+.index-head__title {
+  display: flex;
+  align-items: baseline;
+  gap: var(--ax-3);
+  font-family: var(--ax-font-mono);
+  font-size: var(--ax-label);
+  font-weight: 400;
+  letter-spacing: var(--ax-track);
+  text-transform: uppercase;
+}
+
+.index-head__count {
+  color: var(--ax-ink-2);
+}
+
+/* ---------- Search view ---------- */
+
+.search-view {
+  display: grid;
+  gap: var(--ax-5);
+}
+
+.search-view__head {
+  display: grid;
+  gap: var(--ax-2);
+  padding-bottom: var(--ax-4);
+  border-bottom: 1px solid var(--ax-line-strong);
+}
+
+.search-view__title {
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.search-view__title q {
+  quotes: '“' '”';
+  color: var(--ax-accent);
+}
+
+.search-view__count {
+  color: var(--ax-ink-2);
+  font-family: var(--ax-font-mono);
+  font-size: 12px;
+}
+
+/* ---------- Compact ---------- */
+
+@media (max-width: 1024px) {
+  .collection-view__grid {
+    grid-template-columns: 1fr;
+    gap: var(--ax-5);
+  }
+
+  /* Not sticky in one column, but still the tab's positioning context. */
+  .collection-card {
+    position: relative;
+    top: 0;
+  }
+
+  .collection-card .ledger--stack {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .collection-card .ledger--stack > div {
+    flex-direction: column;
+    gap: 2px;
+  }
+}
+
+@media (max-width: 720px) {
+  .collection-card__title {
+    font-size: 26px;
+  }
+}

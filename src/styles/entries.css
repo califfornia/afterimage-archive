@@ -1,0 +1,202 @@
+/* ==========================================================================
+   Index entries: one record per line, like a catalogue card index
+   ========================================================================== */
+
+.columns,
+.entry__link {
+  display: grid;
+  grid-template-columns: 96px 112px minmax(0, 1fr) 64px 148px;
+  align-items: center;
+  gap: var(--ax-5);
+}
+
+.columns {
+  padding: 0 var(--ax-4) var(--ax-2);
+  border-bottom: 1px solid var(--ax-line-strong);
+  color: var(--ax-ink-3);
+  font-family: var(--ax-font-mono);
+  font-size: 10px;
+  letter-spacing: var(--ax-track);
+  text-transform: uppercase;
+}
+
+.entries {
+  display: grid;
+}
+
+.entry {
+  position: relative;
+  border-bottom: 1px solid var(--ax-line);
+}
+
+.entry__link {
+  position: relative;
+  min-height: 88px;
+  padding: var(--ax-3) var(--ax-4);
+  color: inherit;
+  transition: background-color var(--ax-fast) var(--ax-ease);
+}
+
+@media (hover: hover) {
+  .entry__link:hover {
+    background: var(--ax-surface);
+  }
+
+  .entry__link:hover .entry__still img {
+    filter: none;
+  }
+}
+
+.entry__link:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--ax-accent);
+}
+
+.entry__id {
+  color: var(--ax-ink-2);
+  font-family: var(--ax-font-mono);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Still in a contact-sheet frame. */
+.entry__still {
+  display: block;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 3px solid var(--ax-screen);
+  background: var(--ax-screen);
+  box-shadow: 0 0 0 1px var(--ax-line);
+}
+
+.entry__still img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.35) brightness(0.85);
+  transition: filter var(--ax-med) var(--ax-ease);
+}
+
+.entry__body {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.entry__title {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.3;
+  text-wrap: pretty;
+}
+
+.entry__path {
+  color: var(--ax-ink-2);
+  font-family: var(--ax-font-mono);
+  font-size: 11px;
+}
+
+.entry__duration {
+  color: var(--ax-ink-2);
+  font-family: var(--ax-font-mono);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.entry__status {
+  display: flex;
+  align-items: center;
+  gap: var(--ax-2);
+}
+
+.entry__pct {
+  color: var(--ax-accent);
+  font-family: var(--ax-font-mono);
+  font-size: 11px;
+}
+
+.entry .rule {
+  position: absolute;
+  inset: auto 0 -1px;
+  height: 2px;
+  background: transparent;
+}
+
+/* In an index line the rule only marks partial viewing; "Completed" says the rest. */
+.entry .rule:not([data-status='in-progress']) {
+  display: none;
+}
+
+/* The record on the viewing table. */
+.entry[data-selected] .entry__link {
+  background: var(--ax-surface);
+  box-shadow: inset 3px 0 0 var(--ax-accent);
+}
+
+.entry[data-selected] .entry__id {
+  color: var(--ax-accent);
+}
+
+.entry__flag {
+  position: absolute;
+  bottom: 10px;
+  left: var(--ax-4);
+  color: var(--ax-accent);
+  font-family: var(--ax-font-mono);
+  font-size: 9px;
+  letter-spacing: var(--ax-track);
+  text-transform: uppercase;
+}
+
+/* ---------- Compact entries (beside the player) ---------- */
+
+.entries--compact .entry__link {
+  grid-template-columns: 80px minmax(0, 1fr) auto;
+  grid-template-areas:
+    'still id status'
+    'still title title'
+    'still duration duration';
+  gap: 2px var(--ax-3);
+  min-height: 0;
+  padding: var(--ax-3);
+}
+
+.entries--compact .entry__id { grid-area: id; font-size: 11px; }
+.entries--compact .entry__still { grid-area: still; border-width: 2px; }
+.entries--compact .entry__body { grid-area: title; }
+.entries--compact .entry__title { font-size: 14px; }
+.entries--compact .entry__duration { grid-area: duration; font-size: 11px; }
+.entries--compact .entry__status { grid-area: status; justify-self: end; }
+.entries--compact .entry__flag { display: none; }
+
+/* ---------- Compact screens ---------- */
+
+@media (max-width: 900px) {
+  .columns {
+    display: none;
+  }
+
+  .entry__link {
+    grid-template-columns: 104px minmax(0, 1fr) auto;
+    grid-template-areas:
+      'still id duration'
+      'still title title'
+      'still status status';
+    gap: 4px var(--ax-3);
+    min-height: 0;
+    padding: var(--ax-3) var(--ax-2);
+  }
+
+  .entry__id { grid-area: id; font-size: 11px; }
+  .entry__still { grid-area: still; align-self: start; }
+  .entry__body { grid-area: title; }
+  .entry__title { font-size: 15px; }
+  .entry__duration { grid-area: duration; justify-self: end; font-size: 11px; }
+  .entry__status { grid-area: status; }
+
+  .entry__flag {
+    position: static;
+    grid-area: auto;
+    grid-column: 2 / -1;
+  }
+}

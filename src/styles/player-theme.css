@@ -1,0 +1,43 @@
+/*
+ * Bridge from the Archive's tokens to the AFTERIMAGE player skin.
+ *
+ * Imported by the player adapter (src/player/afterimage.ts). It sets the
+ * skin's public --ai-* tokens from the Archive's
+ * --ax-* tokens, on the skin host, so the player takes the Archive's palette
+ * without any change inside the skin. Separate prefixes keep the mapping
+ * free of self-references.
+ */
+afterimage-skin {
+  --ai-bg: var(--ax-bg);
+  --ai-surface: var(--ax-surface);
+  --ai-raised: var(--ax-raised);
+  --ai-pressed: var(--ax-pressed);
+  --ai-screen: var(--ax-screen);
+
+  --ai-paper: var(--ax-paper);
+  --ai-ink-2: var(--ax-ink-2);
+  --ai-ink-3: var(--ax-ink-3);
+
+  --ai-accent: var(--ax-accent);
+  --ai-accent-rgb: var(--ax-accent-rgb);
+  --ai-accent-ink: var(--ax-accent-ink);
+
+  --ai-line: var(--ax-line);
+  --ai-line-strong: var(--ax-line-strong);
+  --ai-line-loud: var(--ax-line-loud);
+
+  --ai-font-sans: var(--ax-font-sans);
+  --ai-font-display: var(--ax-font-sans);
+  --ai-font-mono: var(--ax-font-mono);
+  --ai-radius: var(--ax-radius);
+
+  /* Inside the Archive the player sits on the viewing table, not in a room. */
+  --ai-surround: var(--ax-screen);
+}
+
+/* The player fills the reserved 16:9 frame. */
+[data-player-slot] .player,
+[data-player-slot] video-player {
+  display: block;
+  height: 100%;
+}

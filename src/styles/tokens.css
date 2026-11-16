@@ -1,0 +1,98 @@
+/*
+ * AFTERIMAGE ARCHIVE tokens.
+ * Prefixed --ax- (archive) so they never collide with the player's --ai-
+ * tokens; player-theme.css maps one onto the other when the player arrives.
+ */
+:root {
+  color-scheme: dark;
+
+  /* Surfaces: the darkroom palette shared with the AFTERIMAGE player. */
+  --ax-bg: #0c0706;
+  --ax-surface: #160c0a;
+  --ax-raised: #22110d;
+  --ax-raised-hover: #2a1510;
+  --ax-pressed: #2e1611;
+  --ax-screen: #050202; /* the viewing surface: the easel under the enlarger */
+  --ax-masthead: rgb(12 7 6 / 0.96);
+
+  /* Ink */
+  --ax-paper: #f3dcd0; /* print paper under safelight */
+  --ax-paper-ink: #1e0f0b; /* text printed on paper labels */
+  --ax-ink-2: #c0948a;
+  --ax-ink-3: #86594f; /* decorative / large text only: under 4.5:1 on --ax-bg */
+
+  /* Paper goods: index-card tabs, card stock, the label holder's metal frame. */
+  --ax-tab: #e3c6b8;
+  --ax-tab-dim: #cfae9f;
+  --ax-holder: #3a1d16;
+
+  /* Signal: the safelight. Selection, active state, the record on the table. Used sparingly. */
+  --ax-accent: #ff4b2e;
+  --ax-accent-rgb: 255 75 46;
+  --ax-accent-ink: #0c0706;
+
+  /* Lines */
+  --ax-line: rgb(255 140 110 / 0.1);
+  --ax-line-strong: rgb(255 140 110 / 0.2);
+  --ax-line-loud: rgb(255 150 120 / 0.36);
+
+  /* Type */
+  --ax-font-sans: 'Archivo Variable', ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --ax-font-mono: 'Space Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --ax-label: 11px;
+  --ax-track: 0.12em;
+
+  /* Space: 4 px grid */
+  --ax-1: 4px;
+  --ax-2: 8px;
+  --ax-3: 12px;
+  --ax-4: 16px;
+  --ax-5: 24px;
+  --ax-6: 32px;
+  --ax-7: 48px;
+  --ax-8: 64px;
+  --ax-gutter: 40px;
+
+  /* Geometry */
+  --ax-radius: 2px;
+  --ax-control: 40px;
+  --ax-masthead-h: 64px;
+  --ax-content-max: 1440px;
+  --ax-focus: 0 0 0 2px var(--ax-bg), 0 0 0 4px var(--ax-accent);
+
+  /* Motion */
+  --ax-ease: cubic-bezier(0.2, 0, 0, 1);
+  --ax-fast: 120ms;
+  --ax-med: 220ms;
+  --ax-slow: 380ms;
+}
+
+@media (pointer: coarse) {
+  :root {
+    --ax-control: 44px;
+  }
+}
+
+@media (max-width: 720px) {
+  :root {
+    --ax-gutter: 16px;
+    --ax-masthead-h: 56px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --ax-fast: 0.01ms;
+    --ax-med: 0.01ms;
+    --ax-slow: 0.01ms;
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --ax-ink-2: #e0bfb5;
+    --ax-ink-3: #c0948a;
+    --ax-line: rgb(255 170 150 / 0.26);
+    --ax-line-strong: rgb(255 170 150 / 0.42);
+  }
+}

@@ -1,0 +1,370 @@
+/* ==========================================================================
+   View A — the cabinet
+   ========================================================================== */
+
+.overview {
+  display: grid;
+  grid-template-columns: minmax(280px, 4fr) minmax(0, 8fr);
+  gap: var(--ax-8);
+  align-items: start;
+}
+
+.overview__intro {
+  position: sticky;
+  top: calc(var(--ax-masthead-h) + var(--ax-6));
+  display: grid;
+  gap: var(--ax-5);
+}
+
+.overview__title {
+  font-size: clamp(56px, 6.2vw, 96px);
+  font-weight: 560;
+  font-stretch: 62%;
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.overview__lede {
+  max-width: 38ch;
+  color: var(--ax-ink-2);
+  font-size: 16px;
+  text-wrap: pretty;
+}
+
+/* The record on the viewing table. */
+.resume {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2px var(--ax-3);
+  padding: var(--ax-4);
+  border: 1px solid var(--ax-line-strong);
+  border-left: 3px solid var(--ax-accent);
+  background: var(--ax-surface);
+  transition: background-color var(--ax-fast) var(--ax-ease);
+}
+
+.resume__label {
+  grid-column: 1 / -1;
+  color: var(--ax-ink-2);
+  font-family: var(--ax-font-mono);
+  font-size: 10px;
+  letter-spacing: var(--ax-track);
+  text-transform: uppercase;
+}
+
+.resume__id {
+  color: var(--ax-accent);
+  font-family: var(--ax-font-mono);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.resume__title {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.resume__meta {
+  grid-column: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ax-2);
+  color: var(--ax-ink-2);
+  font-size: 12px;
+}
+
+.resume__go {
+  grid-column: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ax-2);
+  margin-top: var(--ax-2);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+@media (hover: hover) {
+  .resume:hover {
+    background: var(--ax-raised);
+  }
+}
+
+/* ---------- The cabinet body ---------- */
+
+.cabinet {
+  display: grid;
+  gap: var(--ax-3);
+  padding: var(--ax-4) var(--ax-4) var(--ax-5);
+  border: 1px solid var(--ax-line-strong);
+  background:
+    linear-gradient(var(--ax-line), var(--ax-line)) left 6px top 0 / 1px 100% no-repeat,
+    linear-gradient(var(--ax-line), var(--ax-line)) right 6px top 0 / 1px 100% no-repeat,
+    var(--ax-surface);
+}
+
+.cabinet__plate {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 var(--ax-2) var(--ax-2);
+  border-bottom: 1px solid var(--ax-line);
+  color: var(--ax-ink-3);
+  font-family: var(--ax-font-mono);
+  font-size: 10px;
+  letter-spacing: var(--ax-track);
+  text-transform: uppercase;
+}
+
+/* Each slot leaves headroom for the index-card tabs that rise when the drawer opens. */
+.cabinet__slot {
+  position: relative;
+  padding-top: 16px;
+  overflow: hidden;
+}
+
+.drawer {
+  position: relative;
+  display: block;
+  color: inherit;
+}
+
+.drawer:focus-visible {
+  outline: none;
+}
+
+.drawer:focus-visible .drawer__front {
+  box-shadow: var(--ax-focus);
+}
+
+/* Folder tabs peeking over the drawer's top edge. */
+.drawer__tabs {
+  position: absolute;
+  top: -16px;
+  left: var(--ax-6);
+  right: var(--ax-6);
+  display: flex;
+  gap: var(--ax-2);
+  height: 18px;
+  transform: translateY(16px);
+  transition: transform var(--ax-slow) var(--ax-ease);
+}
+
+.drawer__tab {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 10px;
+  margin-left: calc(var(--i) * 4%);
+  background: var(--ax-tab-dim);
+  color: var(--ax-paper-ink);
+  font-family: var(--ax-font-mono);
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  clip-path: polygon(5px 0, calc(100% - 5px) 0, 100% 100%, 0 100%);
+}
+
+.drawer__front {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    'number counts'
+    'label label'
+    'handle handle'
+    'foot foot';
+  row-gap: var(--ax-4);
+  padding: var(--ax-4) var(--ax-5) var(--ax-4);
+  border: 1px solid var(--ax-line-strong);
+  border-radius: var(--ax-radius);
+  background: var(--ax-raised);
+  box-shadow: 0 1px 0 rgb(255 255 255 / 0.03) inset, 0 -1px 0 rgb(0 0 0 / 0.4) inset;
+  transition:
+    transform var(--ax-slow) var(--ax-ease),
+    box-shadow var(--ax-slow) var(--ax-ease),
+    border-color var(--ax-med) var(--ax-ease);
+}
+
+.drawer__number {
+  grid-area: number;
+  font-family: var(--ax-font-mono);
+  font-size: var(--ax-label);
+  letter-spacing: var(--ax-track);
+  text-transform: uppercase;
+  color: var(--ax-ink-2);
+}
+
+.drawer__counts {
+  grid-area: counts;
+  font-family: var(--ax-font-mono);
+  font-size: var(--ax-label);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ax-ink-2);
+}
+
+/* Paper label in a metal holder. */
+.drawer__label {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--ax-3);
+  justify-self: center;
+  min-width: min(320px, 100%);
+  padding: 10px var(--ax-5) 9px;
+  border-radius: 1px;
+  background: var(--ax-paper);
+  color: var(--ax-paper-ink);
+  box-shadow:
+    0 0 0 3px var(--ax-holder),
+    0 0 0 4px rgb(0 0 0 / 0.5),
+    0 1px 0 4px rgb(255 255 255 / 0.06);
+}
+
+.drawer__label {
+  grid-area: label;
+}
+
+.drawer__label-code {
+  font-family: var(--ax-font-mono);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.drawer__label-name {
+  font-size: 22px;
+  font-weight: 650;
+  font-stretch: 80%;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+/* Pull handle. */
+.drawer__handle {
+  grid-area: handle;
+  justify-self: center;
+  width: 128px;
+  height: 12px;
+  border: 1.5px solid var(--ax-ink-3);
+  border-top: 0;
+  border-radius: 0 0 3px 3px;
+  transition: border-color var(--ax-med) var(--ax-ease);
+}
+
+.drawer__foot {
+  grid-area: foot;
+  display: flex;
+  align-items: center;
+  gap: var(--ax-4);
+  padding-top: var(--ax-3);
+  border-top: 1px solid var(--ax-line);
+}
+
+.drawer__summary {
+  flex: 1;
+  min-width: 0;
+  color: var(--ax-ink-2);
+  font-family: var(--ax-font-mono);
+  font-size: var(--ax-label);
+  letter-spacing: 0.04em;
+}
+
+.drawer__open {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ax-2);
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Opening: the front comes forward, the handle catches the light, tabs rise. */
+@media (hover: hover) {
+  .drawer:hover .drawer__front {
+    transform: translateY(4px);
+    border-color: var(--ax-line-loud);
+    box-shadow: 0 1px 0 rgb(255 255 255 / 0.04) inset, 0 -1px 0 rgb(0 0 0 / 0.4) inset, 0 -10px 18px -10px rgb(0 0 0 / 0.8);
+  }
+
+  .drawer:hover .drawer__tabs {
+    transform: translateY(4px);
+  }
+
+  .drawer:hover .drawer__handle {
+    border-color: var(--ax-accent);
+  }
+}
+
+.drawer:focus-visible .drawer__tabs {
+  transform: translateY(4px);
+}
+
+.drawer:focus-visible .drawer__handle {
+  border-color: var(--ax-accent);
+}
+
+/* ---------- Compact ---------- */
+
+@media (max-width: 1024px) {
+  .overview {
+    grid-template-columns: 1fr;
+    gap: var(--ax-6);
+  }
+
+  .overview__intro {
+    position: static;
+  }
+}
+
+@media (max-width: 720px) {
+  .overview__title {
+    font-size: 56px;
+  }
+
+  .cabinet {
+    padding: var(--ax-2) var(--ax-2) var(--ax-3);
+    background: var(--ax-surface);
+  }
+
+  .drawer__front {
+    grid-template-areas:
+      'number number'
+      'label label'
+      'counts counts'
+      'foot foot';
+    padding: var(--ax-3) var(--ax-4);
+    row-gap: var(--ax-3);
+  }
+
+  .drawer__handle {
+    display: none;
+  }
+
+  .drawer__label {
+    justify-self: stretch;
+    min-width: 0;
+    margin: 4px;
+  }
+
+  .drawer__label-name {
+    font-size: 19px;
+  }
+
+  .drawer__foot {
+    flex-wrap: wrap;
+    gap: var(--ax-2) var(--ax-3);
+  }
+
+  .drawer__summary {
+    flex-basis: 100%;
+    order: 3;
+  }
+
+  .drawer__open {
+    margin-left: auto;
+    min-height: 44px;
+  }
+
+  .ledger {
+    grid-template-columns: 1fr 1fr;
+  }
+}
